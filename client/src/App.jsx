@@ -7,6 +7,7 @@ import SignUp from './pages/SignUp.jsx'
 import Dashboard from './pages/Dashboard'
 import Projects from './pages/Projects'
 import Header from './components/Header.jsx'
+import FooterCom from './components/Footer.jsx'
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
     
 
   </Routes>
+  <FooterCom/>
   </BrowserRouter>
   )
 }
