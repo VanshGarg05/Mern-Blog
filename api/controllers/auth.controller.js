@@ -66,7 +66,42 @@ const signin =  asyncHandler(async (req,res)=>{
 
 })
 
+
+const google = asyncHandler(async(req,res)=>{
+    const {email,name,googlePhotoUrl} = req.body
+    const user = await User.findOne({email})
+    if(user){
+        const token = jwt.sign(
+            {id:user._id},process.env.JWT_SECRET
+        )
+        const {password,...rest} = user._doc
+        
+        return res
+        .status(200)
+        .cookie('access_token',token , {httpOnly:true,secure:true})
+        .json(new ApiResponse(200,rest,"SAVED"))
+    }else{
+        const generatedPassword = Math.random().toString(36).slice(-8)
+        const hashedPass = bcryptjs.hashSync(generatedPassword,10)
+        const newUser = new User({
+            username:name.toLowerCase().split(' ').join('')+Math.random().toString(9).slice(-4),
+            email,
+            password: hashedPass,
+            profilePicture:googlePhotoUrl
+        })
+        await newUser.save()
+        const token = jwt.sign({id:newUser._id},process.env.JWT_SECRET)
+        const {password,...rest} = newUser._doc
+        return res
+        .status(200)
+        .cookie('access_token',token , {httpOnly:true,secure:true})
+        .json(new ApiResponse(200,rest,"SAVED"))
+    }
+
+})
+
 export {
     signup,
-    signin   
+    signin,
+    google
 }
