@@ -117,12 +117,12 @@ export default function DashProfile() {
           placeholder='Password'
           onChange={handleChange}
         />
-        <Button type='submit' disabled={loading}>
+        <Button type='submit' className='bg-gradient-to-r from-cyan-500 to-blue-500' disabled={loading}>
           {loading ? 'Loading...' : 'Update'}
         </Button>
-        {currentUser.isAdmin && (
+        {currentUser.data.isAdmin && (
           <Link to='/create-post'>
-            <Button gradientDuoTone='purpleToPink' className='w-full'>
+            <Button className='bg-gradient-to-r from-purple-500 to-pink-700 w-full' >
               Create a post
             </Button>
           </Link>

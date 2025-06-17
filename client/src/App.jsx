@@ -9,6 +9,8 @@ import Projects from './pages/Projects'
 import Header from './components/Header.jsx'
 import FooterCom from './components/Footer.jsx'   
 import PrivateRouter from "./components/PrivateRouter.jsx"
+import OnlyAdminPrivateRoute from './components/OnlyAdminPrivateRouter .jsx'
+import CreatePost from "./pages/CreatePost.jsx"
 
 function App() {
 
@@ -21,11 +23,16 @@ function App() {
     <Route path='/about' element={<About/>}/>
     <Route path='/sign-in' element={<SignIn/>}/>
     <Route path='/sign-up' element={<SignUp/>}/>
+
     <Route element={<PrivateRouter/>}>
     <Route path='/dashboard' element={<Dashboard/>}/>
     </Route>
+
     <Route path='/projects' element={<Projects/>}/>
     
+    <Route element={<OnlyAdminPrivateRoute/>}>
+    <Route path='/create-post' element={<CreatePost/>}/>
+    </Route>
 
   </Routes>
   <FooterCom/>
