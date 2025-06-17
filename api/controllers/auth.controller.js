@@ -75,7 +75,7 @@ const google = asyncHandler(async(req,res)=>{
             {id:user._id},process.env.JWT_SECRET
         )
         const {password,...rest} = user._doc
-        
+     
         return res
         .status(200)
         .cookie('access_token',token , {httpOnly:true,secure:true})
