@@ -3,8 +3,10 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { Post } from "../models/post.models.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 
+
 const create = asyncHandler(async(req,res)=>{
  
+    
     if(!req.user.isAdmin){
         throw new ApiError(403,"You are not allowed to create a post")
     }
@@ -27,6 +29,9 @@ const create = asyncHandler(async(req,res)=>{
     .json(new ApiResponse(200,savedPost,"Post Saved"))
 })
 
+
+
 export {
-    create
+    create,
+    
 }
