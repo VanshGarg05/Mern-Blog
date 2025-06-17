@@ -59,7 +59,7 @@ export default function DashSidebar() {
             <SidebarItem
               active={tab === 'profile'}
               icon={HiUser}
-              label={currentUser.isAdmin ? 'Admin' : 'User'}
+              label={currentUser.data.isAdmin ? 'Admin' : 'User'}
               labelColor='dark'
               as='div'
             >
@@ -68,7 +68,7 @@ export default function DashSidebar() {
           </Link>
           {currentUser.data.isAdmin && (
             <Link to='/dashboard?tab=posts'>
-              <SidebarItem
+               <SidebarItem
                 active={tab === 'posts'}
                 icon={HiDocumentText}
                 as='div'
