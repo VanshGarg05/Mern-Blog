@@ -12,6 +12,7 @@ import PrivateRouter from "./components/PrivateRouter.jsx"
 import OnlyAdminPrivateRoute from './components/OnlyAdminPrivateRouter .jsx'
 import CreatePost from "./pages/CreatePost.jsx"
 import UpdatePost from './pages/UpdatePost.jsx'
+import PostPage from './pages/PostPage.jsx'
 
 function App() {
 
@@ -29,12 +30,13 @@ function App() {
     <Route path='/dashboard' element={<Dashboard/>}/>
     </Route>
 
-    <Route path='/projects' element={<Projects/>}/>
     
     <Route element={<OnlyAdminPrivateRoute/>}>
     <Route path='/create-post' element={<CreatePost/>}/>
     <Route path='/update-post/:postId' element={<UpdatePost/>}/>
     </Route>
+    <Route path='/projects' element={<Projects/>}/>
+    <Route path='/post/:postSlug' element={<PostPage/>}/>
 
   </Routes>
   <FooterCom/>
