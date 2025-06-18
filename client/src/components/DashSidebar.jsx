@@ -77,7 +77,7 @@ export default function DashSidebar() {
               </SidebarItem>
             </Link>
           )}
-          {currentUser.isAdmin && (
+          {currentUser.data.isAdmin && (
             <>
               <Link to='/dashboard?tab=users'>
                 <SidebarItem
