@@ -64,6 +64,34 @@ const handleSubmit = async(e)=>{
     },[postId])
 
     // console.log(comments);
+    const handleLike = async (commentId)=>{
+        try {
+            if(!currentUser){
+                navigate('/sign-in')
+                return
+            }
+            const res = await fetch(`/api/comment/likeComment/${commentId}`,{
+                method:'PUT',
+                
+            })
+            if(res.ok){
+                const data = await res.json()
+                console.log(data);
+                setComments(comments.map((comment)=>
+                    comment._id===commentId ? {
+                        ...comment,
+                        likes:data.likes,
+                        numberOfLikes : data.likes.length,
+
+                    } : comment
+                    
+                ))
+            }
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+   
 
 
   return (
@@ -122,6 +150,7 @@ const handleSubmit = async(e)=>{
                 <Comment
                 key={c._id}
                 comment={c}
+                onLike={handleLike}
                 />
             ))
             }
