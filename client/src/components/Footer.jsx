@@ -22,11 +22,11 @@ export default function FooterCom() {
               <FooterTitle title='About' />
               <FooterLinkGroup col>
                 <FooterLink
-                  href='https://www.100jsprojects.com'
+                  href='https://pokedex-ten-beige-67.vercel.app/'
                   target='_blank'
                   rel='noopener noreferrer'
                 >
-                  100 JS Projects
+                  Pokédex
                 </FooterLink>
                 <FooterLink
                   href='/about'

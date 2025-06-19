@@ -52,25 +52,38 @@ const Header = () => {
     const searchQuery = urlParams.toString();
     navigate(`/search?${searchQuery}`);
   };
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 768);
+
+useEffect(() => {
+  const handleResize = () => setIsDesktop(window.innerWidth >= 768);
+  window.addEventListener('resize', handleResize);
+  return () => window.removeEventListener('resize', handleResize);
+}, []);
+
+const searchForm = (<form onSubmit={handleSubmit}>
+  <TextInput
+    type='text'
+    placeholder='Search...'
+    rightIcon={ AiOutlineSearch}
+    value={searchTerm}
+    onChange={(e)=> setSearchTerm(e.target.value)}
+    
+  />
+</form>)
+
   return (
     <Navbar className='border-b-2'>
       <Link to="/" className='self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white'>
         <span className='px-2 py-1 bg-gradient-to-r  from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white'>Vansh's</span>
         Blog
       </Link>
-      <form onSubmit={handleSubmit}>
-        <TextInput
-          type='text'
-          placeholder='Search...'
-          rightIcon={ AiOutlineSearch}
-          value={searchTerm}
-          onChange={(e)=> setSearchTerm(e.target.value)}
-          
-        />
-      </form>
+      
+      {isDesktop && searchForm}
+      <Link to='/search'>
       <Button className='w-15 h-10 lg:hidden' color='gray' pill>
         <AiOutlineSearch/>
       </Button>
+      </Link>
       <div className='flex gap-2 md:order-2'>
         <Button className='w-12 h-10  sm:inline' color='gray' pill onClick={()=>dispatch(toggleTheme()) }>
           <FaMoon/>
@@ -105,9 +118,39 @@ const Header = () => {
        
         <NavbarToggle/>
       </div>
+  
+  
+      {isDesktop && (
+  <div className="flex gap-4">
+    <Link
+      to="/"
+      className={`px-3 py-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700 ${
+        path === '/' ? 'font-semibold text-blue-600 dark:text-blue-400' : ''
+      }`}
+    >
+      Home
+    </Link>
+    <Link
+      to="/about"
+      className={`px-3 py-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700 ${
+        path === '/about' ? 'font-semibold text-blue-600 dark:text-blue-400' : ''
+      }`}
+    >
+      About
+    </Link>
+    <Link
+      to="/projects"
+      className={`px-3 py-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700 ${
+        path === '/projects' ? 'font-semibold text-blue-600 dark:text-blue-400' : ''
+      }`}
+    >
+      Projects
+    </Link>
+  </div>
+)}
 
       
-      <NavbarCollapse className="">
+  <NavbarCollapse className=" w-full md:flex md:w-auto md:items-center md:gap-6">
   <NavbarLink as={Link} to='/'>
     Home
   </NavbarLink>
@@ -117,9 +160,9 @@ const Header = () => {
   <NavbarLink as={Link} to='/projects'>
     Projects
   </NavbarLink>
-</NavbarCollapse>
 
 
+  </NavbarCollapse>
     </Navbar>
   )
 }
