@@ -39,7 +39,8 @@ const handleSubmit = async(e)=>{
      if(res.ok){
          setComment('')
          setCommentError(null)
-         setComments([data,...comments])
+         setComments([data.data,...comments])
+         
      }
  
    } catch (error) {

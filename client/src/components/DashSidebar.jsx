@@ -44,7 +44,7 @@ export default function DashSidebar() {
     <Sidebar className='w-full md:w-56'>
       <SidebarItems>
         <SidebarItemGroup className='flex flex-col gap-1'>
-          {currentUser && currentUser.isAdmin && (
+          {currentUser && currentUser.data.isAdmin && (
             <Link to='/dashboard?tab=dash'>
               <SidebarItem
                 active={tab === 'dash' || !tab}

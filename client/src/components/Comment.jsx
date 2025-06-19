@@ -8,9 +8,11 @@ export default function Comment({comment, onLike, onEdit, onDelete}) {
     const [user,setUser] = useState({})
     const [isEditing,setIsEditing] = useState(false)
     const [editedContent, setEditedContent] = useState(comment.content);
-
+    
+    
     // console.log(user);
     const { currentUser } = useSelector((state)=>state.user)
+    const isLiked = currentUser?.data?._id && comment.likes?.includes(currentUser.data._id);
 
     
     useEffect(()=>{
@@ -96,7 +98,7 @@ export default function Comment({comment, onLike, onEdit, onDelete}) {
         ):(<>
         <p className='text-gray-500 pb-2'>{comment.content}</p>
             <div className='flex items-center pt-2 text-xs border-t dark:border-gray-700 max-w-fit gap-2'>
-                <button type='button' onClick={()=>onLike(comment._id)} className={`text-gray-400 hover:text-blue-500 ${currentUser && comment.likes.includes(currentUser.data._id) && 'text-blue-500'}`}
+                <button type='button' onClick={()=>onLike(comment._id)} className={` hover:text-blue-500 ${isLiked? ' text-blue-500' : 'text-gray-400'} `}
 >
                     <FaThumbsUp className='text-sm '/>
                 </button>
