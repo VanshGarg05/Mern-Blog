@@ -59,9 +59,35 @@ const likeComment = asyncHandler(async(req,res)=>{
 })
 
 
+const editComment = asyncHandler(async(req,res)=>{
+
+    const comment  = await Comment.findById(req.params.commentId)
+
+    if(!comment){
+        throw new ApiError(404,"Comment not found")
+    }
+    if(comment.userId !== req.user.id && req.user.isAdmin === false){
+        throw new ApiError(403,"You are not allowed to edit this comment")
+    }
+    const editedComment = await Comment.findByIdAndUpdate(
+        req.params.commentId,
+        {
+          content: req.body.content,
+        },
+        { new: true }
+      )
+
+      return res
+      .status(200)
+      .json(new ApiResponse(200,editedComment,"Comment edited Successfully"))
+
+
+})
+
 export 
 {
     createComment,
     getPostComments,
-    likeComment
+    likeComment,
+    editComment
 }
