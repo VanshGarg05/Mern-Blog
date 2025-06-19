@@ -58,11 +58,13 @@ const Header = () => {
         <span className='px-2 py-1 bg-gradient-to-r  from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white'>Vansh's</span>
         Blog
       </Link>
-      <form>
+      <form onSubmit={handleSubmit}>
         <TextInput
           type='text'
           placeholder='Search...'
           rightIcon={ AiOutlineSearch}
+          value={searchTerm}
+          onChange={(e)=> setSearchTerm(e.target.value)}
           
         />
       </form>
