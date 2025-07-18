@@ -144,15 +144,15 @@ const updatePost = asyncHandler(async(req,res)=>{
 const uploadPostImage = asyncHandler(async (req,res)=>{
 
 const imageLocalPath = path.resolve(req.file?.path);
-console.log("imageLocalPath:", imageLocalPath);
+
 // const coverImageLocalPath = req.files?.coverImage[0]?.path;
 if(!imageLocalPath){
     throw new ApiError(400, "Avatar file is required");
 }
-console.log("imageLocalPath:", imageLocalPath);
+
 
     const image = await uploadOnCLoudinary(imageLocalPath)
-    console.log("Cloudinary upload result:", image);
+    
     if(!image){
         throw new ApiError(400, "Image file is required");
     }

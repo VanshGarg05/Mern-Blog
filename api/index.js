@@ -7,6 +7,8 @@ import postRoute from "./routes/post.route.js"
 import commentRoute from "./routes/comment.route.js "
 import cors from "cors"
 import cookieParser from "cookie-parser";
+import path from 'path';
+
 
 dotenv.config()
 
@@ -17,6 +19,9 @@ mongoose.connect(process.env.MONGODB_URI)
 .catch((err)=>{
     console.log(err);
 })
+
+const __dirname = path.resolve();
+
 const app = express()
 
 
@@ -47,3 +52,9 @@ app.use('/api/user',userRoute)
 app.use('/api/auth',authRoute)
 app.use('/api/post',postRoute)
 app.use('/api/comment',commentRoute)
+
+app.use(express.static(path.join(__dirname, '/client/dist')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+});
