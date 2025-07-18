@@ -19,8 +19,23 @@ mongoose.connect(process.env.MONGODB_URI)
 })
 const app = express()
 
-app.use(cors())
-app.use(express.json())
+
+
+app.use(cors({
+    origin: "http://localhost:5173", // ✅ specify exact origin
+    credentials: true,               // ✅ allow cookies
+}));
+
+app.use((req, res, next) => {
+    const contentType = req.headers["content-type"] || "";
+    if (contentType.startsWith("multipart/form-data")) {
+      next(); // Skip JSON parser for file uploads
+    } else {
+      express.json({ limit: "10mb" })(req, res, next);
+    }
+  });
+  
+app.use(express.urlencoded({extended: true,limit:'16kb'}))
 app.use(cookieParser())
 
 app.listen(3000,()=>{

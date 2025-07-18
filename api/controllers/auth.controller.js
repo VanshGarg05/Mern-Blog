@@ -58,9 +58,11 @@ const signin =  asyncHandler(async (req,res)=>{
     const loggedInUser = await User.findById(validUser._id).select("-password")
 
     const options = {
-        httpOnly:true,
-        secure: true
-    }
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production", // only secure in production
+        sameSite: "lax" // recommended for CSRF protection
+    };
+    
 
     return res
     .status(200)
