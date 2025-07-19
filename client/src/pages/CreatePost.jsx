@@ -28,7 +28,7 @@ export default function CreatePost() {
         const formData = new FormData();
         formData.append('image', file);
 
-        const response = await fetch('http://localhost:3000/api/post/uploadImage', {
+        const response = await fetch('/api/post/uploadImage', {
             method: 'POST',
             body: formData,
         });
@@ -85,7 +85,7 @@ export default function CreatePost() {
             imageUrl: imageFileUrl || null,  // ✅ explicitly add the stored Cloudinary URL
         };
 
-        const res = await fetch('http://localhost:3000/api/post/create', { // ✅ your backend URL
+        const res = await fetch('api/post/create', { // ✅ your backend URL
             method: "POST",
             credentials: "include",
             headers: {
