@@ -40,7 +40,7 @@ function App() {
     <Route path='/update-post/:postId' element={<UpdatePost/>}/>
     </Route>
     <Route path='/projects' element={<Projects/>}/>
-    <Route path='/post/:postSlug' element={<PostPage/>}/>
+    <Route path='/post/:postSlug' element={<PostPage />} />
 
   </Routes>
   <FooterCom/>
