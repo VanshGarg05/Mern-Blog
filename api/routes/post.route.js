@@ -7,7 +7,6 @@ const router = express.Router()
 
 // In your routes file
 router.post('/create', verifyToken, createPost);
-// router.route('/create').post(verifyToken, upload.single("image"),create)
 router.route('/getposts').get(getPosts)
 router.route('/deletepost/:postId/:userId').delete(verifyToken,deletepost)
 router.route('/updatepost/:postId/:userId').put(verifyToken,updatePost)

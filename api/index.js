@@ -4,7 +4,7 @@ import dotenv from "dotenv"
 import userRoute from "./routes/user.route.js"
 import authRoute from "./routes/auth.route.js"
 import postRoute from "./routes/post.route.js"
-import commentRoute from "./routes/comment.route.js "
+import commentRoute from "./routes/comment.route.js"
 import cors from "cors"
 import cookieParser from "cookie-parser";
 import path from 'path';
@@ -26,10 +26,7 @@ const app = express()
 
 
 
-app.use(cors({
-    origin: "http://localhost:5173", // ✅ specify exact origin
-    credentials: true,               // ✅ allow cookies
-}));
+app.use(cors());
 
 app.use((req, res, next) => {
     const contentType = req.headers["content-type"] || "";
