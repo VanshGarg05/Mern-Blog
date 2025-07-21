@@ -8,7 +8,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: `http://localhost:4000`,
+        target: `https://mern-blog-1-v2ar.onrender.com`,
         changeOrigin: true,
         secure: false,
         // rewrite: (path) => path.replace(/^\/api/, '') // uncomment if needed
